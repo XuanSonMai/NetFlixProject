@@ -5,6 +5,9 @@ const dotenv = require('dotenv');
 
 //ROUTE
 const authRoute = require('./routes/auth');
+const userRoute = require('./routes/user');
+const moviesRoute = require('./routes/movies');
+const listRouter = require('./routes/list');
 
 dotenv.config();
 
@@ -18,7 +21,11 @@ mongoose
         console.error(err);
     });
 app.use(express.json());
+
 app.use('/api/auth', authRoute);
+app.use('/api/users', userRoute);
+app.use('/api/movies', moviesRoute);
+app.use('/api/list', listRouter);
 
 app.listen(8800, () => {
     console.log('Backend server is running!');

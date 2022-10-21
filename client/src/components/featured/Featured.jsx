@@ -1,13 +1,13 @@
 import './featured.scss';
 import { infoImage, netFlixImage, ptvhImage } from '../../img/img.js';
 import { InfoOutlined, PlayArrow } from '@material-ui/icons';
-
+import ptvh1Img from '../../acsets/img/ptvh1.jpeg';
 export default function Featured({ type }) {
     return (
         <div className="featured">
             {type && (
                 <div className="category">
-                    <span>{type === 'movie' ? 'Movies' : 'Series'}</span>
+                    <span>{type === 'movies' ? 'Movies' : 'Series'}</span>
                     <select name="genre" id="genre">
                         <option>Genre</option>
                         <option value="adventure">Adventure</option>
@@ -27,7 +27,7 @@ export default function Featured({ type }) {
                 </div>
             )}
 
-            <img src={ptvhImage} alt=""></img>
+            <img src={ptvh1Img} alt=""></img>
 
             <div className="info">
                 <img src={infoImage} alt="" />

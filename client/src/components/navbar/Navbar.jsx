@@ -1,7 +1,11 @@
 import { ArrowDropDown, Notifications, Search } from '@material-ui/icons';
 import { useState } from 'react';
 import { netFlixImage, ptvhImage } from '../../img/img';
+
+import ptvh2Img from '../../acsets/img/ptvh2.jpeg';
+
 import './navbar.scss';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -18,8 +22,12 @@ export const Navbar = () => {
                     {' '}
                     <img src={netFlixImage} />
                     <span>Homepage</span>
-                    <span>Series</span>
-                    <span>Movies</span>
+                    <Link className="linkClass" to="/series">
+                        <span>Series</span>
+                    </Link>
+                    <Link className="linkClass" to="/movies">
+                        <span>Movies</span>
+                    </Link>
                     <span>New and Popular</span>
                     <span>My List</span>
                 </div>
@@ -27,7 +35,7 @@ export const Navbar = () => {
                     <Search className="icon" />
                     <span>KID</span>
                     <Notifications className="icon" />
-                    <img src={ptvhImage}></img>
+                    <img src={ptvh2Img}></img>
 
                     <div className="profile">
                         <ArrowDropDown className="icon" />
