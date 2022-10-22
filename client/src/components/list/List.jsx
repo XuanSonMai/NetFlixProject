@@ -1,10 +1,10 @@
-import { ArrowBackIosOutlined, ArrowForwardIosOutlined, Directions } from '@material-ui/icons';
+import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@material-ui/icons';
 import { useState } from 'react';
 import { useRef } from 'react';
 import ListItem from '../listitem/Listitem';
 import './list.scss';
 
-export default function List() {
+export default function List({ list }) {
     const listRef = useRef();
     const [slideNumber, setSlideNumber] = useState(0);
     const [isMoved, setisMoved] = useState(false);
@@ -36,7 +36,7 @@ export default function List() {
 
     return (
         <div className="list">
-            <span className="listTitle">Continue</span>
+            <span className="listTitle">{list.title}</span>
             <div className="wrapper">
                 <ArrowBackIosOutlined
                     className="sliderArrow left"
@@ -45,16 +45,9 @@ export default function List() {
                 />
 
                 <div className="container" ref={listRef}>
-                    <ListItem imgUrl={imgUrlArrays[0]} index={0} />
-                    <ListItem imgUrl={imgUrlArrays[1]} index={1} />
-                    <ListItem imgUrl={imgUrlArrays[2]} index={2} />
-                    <ListItem imgUrl={imgUrlArrays[3]} index={3} />
-                    <ListItem imgUrl={imgUrlArrays[4]} index={4} />
-                    <ListItem imgUrl={imgUrlArrays[4]} index={5} />
-                    <ListItem imgUrl={imgUrlArrays[3]} index={6} />
-                    <ListItem imgUrl={imgUrlArrays[2]} index={7} />
-                    <ListItem imgUrl={imgUrlArrays[1]} index={8} />
-                    <ListItem imgUrl={imgUrlArrays[0]} index={9} />
+                    {list.content.map((item, i) => {
+                        return <ListItem key={i} item={item} index={i} />;
+                    })}
                 </div>
 
                 <ArrowForwardIosOutlined

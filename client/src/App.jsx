@@ -8,13 +8,13 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 const App = () => {
-    const user = false;
+    const user = true;
     return (
         <React.StrictMode>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={user ? <Home /> : <Navigate to="/register" />} />
-                    <Route exact path="/movies" element={<Home type="movies" />} />
+                    <Route exact path="/movies" element={<Home type="movie" />} />
 
                     <Route exact path="/series" element={<Home type="series" />} />
 
