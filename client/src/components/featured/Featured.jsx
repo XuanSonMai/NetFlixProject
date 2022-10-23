@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 export default function Featured({ type, title }) {
     const [movieContent, setContent] = useState({});
-
+    console.log(movieContent);
     useEffect(() => {
         const getRandomContent = async () => {
             try {

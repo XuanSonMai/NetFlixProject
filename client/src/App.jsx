@@ -14,12 +14,17 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={user ? <Home /> : <Navigate to="/register" />} />
-                    <Route exact path="/movies" element={<Home type="movie" />} />
-                    <Route exact path="/movies/bogia" element={<Home type="movie" title="bogia" />} />
+                    <Route exact path="/" element={<Home type="movie" />} />
 
-                    <Route exact path="/movies/cogaituquakhu" element={<Home type="movie" title="cogaituquakhu" />} />
-                    <Route exact path="/movies/haiphuong" element={<Home type="movie" title="haiphuong" />} />
-                    <Route exact path="/series" element={<Home type="series" />} />
+                    {/* MOVIES */}
+                    <Route exact path="/bogia" element={<Home type="movie" title="bogia" />} />
+
+                    <Route exact path="/cogaituquakhu" element={<Home type="movie" title="cogaituquakhu" />} />
+                    <Route exact path="/haiphuong" element={<Home type="movie" title="haiphuong" />} />
+
+                    {/* SERIES */}
+                    <Route exact path="/chuyentruonglop" element={<Home type="series" title="chuyentruonglop" />} />
+                    <Route exact path="/huongvitinhthan" element={<Home type="series" title="huongvitinhthan" />} />
 
                     <Route path="/watch" element={<Watch />} />
                     <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />

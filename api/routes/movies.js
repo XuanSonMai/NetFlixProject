@@ -69,10 +69,18 @@ router.get('/random', verify, async (req, res) => {
     const type = req.query.type;
     const titleQuery = req.query.title;
     let movie;
-
+    console.log('random');
     try {
         if (type === 'series') {
-            movie = await Movie.aggregate([{ $match: { isSeries: true } }, { $sample: { size: 3 } }]);
+            if (titleQuery) {
+                movie = await Movie.aggregate([
+                    { $match: { isSeries: true, desc: titleQuery } },
+                    { $sample: { size: 3 } },
+                ]);
+                console.log(movie);
+            } else {
+                movie = await Movie.aggregate([{ $match: { isSeries: true } }, { $sample: { size: 3 } }]);
+            }
         } else {
             if (titleQuery) {
                 console.log('titleQuery', titleQuery);
