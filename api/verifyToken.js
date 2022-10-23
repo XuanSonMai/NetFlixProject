@@ -8,7 +8,6 @@ function verify(req, res, next) {
             if (err) {
                 res.status(403).json('Token is not valid');
             } else {
-                console.log(user);
                 req.user = user;
                 next();
             }

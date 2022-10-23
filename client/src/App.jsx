@@ -15,7 +15,10 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={user ? <Home /> : <Navigate to="/register" />} />
                     <Route exact path="/movies" element={<Home type="movie" />} />
+                    <Route exact path="/movies/bogia" element={<Home type="movie" title="bogia" />} />
 
+                    <Route exact path="/movies/cogaituquakhu" element={<Home type="movie" title="cogaituquakhu" />} />
+                    <Route exact path="/movies/haiphuong" element={<Home type="movie" title="haiphuong" />} />
                     <Route exact path="/series" element={<Home type="series" />} />
 
                     <Route path="/watch" element={<Watch />} />

@@ -6,9 +6,10 @@ import { Navbar } from '../../components/navbar/Navbar';
 import './home.scss';
 import axios from 'axios';
 
-export const Home = ({ type }) => {
+export const Home = ({ type, title }) => {
     const [lists, setLists] = useState([]);
     const [genre, setGenre] = useState(null);
+    console.log('title', title);
 
     useEffect(() => {
         const getRandomLists = async () => {
@@ -31,7 +32,7 @@ export const Home = ({ type }) => {
     return (
         <div className="home">
             <Navbar />
-            <Featured type={type} />
+            <Featured type={type} title={title} />
             {lists.map((list, index) => (
                 <List key={index} list={list} />
             ))}

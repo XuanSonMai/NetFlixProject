@@ -67,16 +67,21 @@ router.get('/', verify, async (req, res) => {
 });
 //GET
 router.get('/options', verify, async (req, res) => {
-    const type = req.query.type;
-    const genre = req.query.genre;
+    const typeQuery = req.query.type;
+    const genreQuery = req.query.genre;
+    const titleQuery = req.query.title;
+    console.log(typeQuery);
 
     let list = [];
     try {
-        if (type) {
-            if (genre) {
-                list = await List.aggregate([{ $sample: { size: 10 } }, { $match: { type, genre } }]);
+        if (typeQuery) {
+            if (genreQuery) {
+                list = await List.aggregate([
+                    { $sample: { size: 10 } },
+                    { $match: { type: typeQuery, genre: genreQuery } },
+                ]);
             } else {
-                list = await List.aggregate([{ $sample: { size: 10 } }, { $match: { type } }]);
+                list = await List.aggregate([{ $sample: { size: 10 } }, { $match: { type: typeQuery } }]);
             }
         } else {
             list = await List.aggregate([{ $sample: { size: 3 } }]);

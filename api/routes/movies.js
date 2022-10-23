@@ -8,7 +8,7 @@ const verify = require('../verifyToken');
 router.post('/', verify, async (req, res) => {
     if (req.user.isAdmin) {
         const newMovie = new Movie(req.body);
-        console.log(newMovie);
+
         try {
             const savedMovie = await newMovie.save();
             res.status(201).json(savedMovie);
@@ -67,13 +67,23 @@ router.get('/', verify, async (req, res) => {
 //GET RANDOM
 router.get('/random', verify, async (req, res) => {
     const type = req.query.type;
-    console.log(type);
+    const titleQuery = req.query.title;
     let movie;
+
     try {
         if (type === 'series') {
             movie = await Movie.aggregate([{ $match: { isSeries: true } }, { $sample: { size: 3 } }]);
         } else {
-            movie = await Movie.aggregate([{ $match: { isSeries: false } }, { $sample: { size: 3 } }]);
+            if (titleQuery) {
+                console.log('titleQuery', titleQuery);
+                movie = await Movie.aggregate([
+                    { $match: { isSeries: false, desc: titleQuery } },
+                    { $sample: { size: 3 } },
+                ]);
+                console.log(movie);
+            } else {
+                movie = await Movie.aggregate([{ $match: { isSeries: false } }, { $sample: { size: 3 } }]);
+            }
         }
         res.status(200).json(movie);
     } catch (error) {

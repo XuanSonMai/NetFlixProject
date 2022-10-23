@@ -2,7 +2,29 @@ import './featured.scss';
 import { infoImage, netFlixImage, ptvhImage } from '../../img/img.js';
 import { InfoOutlined, PlayArrow } from '@material-ui/icons';
 import ptvh1Img from '../../acsets/img/ptvh1.jpeg';
-export default function Featured({ type }) {
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+export default function Featured({ type, title }) {
+    const [movieContent, setContent] = useState({});
+
+    useEffect(() => {
+        const getRandomContent = async () => {
+            try {
+                const res = await axios.get(`/movies/random?type=${type}` + `${title ? '&title=' + title : ''}`, {
+                    headers: {
+                        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGRiYWIxODA4NjQ4NjI2ODI1MWY2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjM5OTM5MSwiZXhwIjoxNjY2ODMxMzkxfQ.xjx_SgXKKsqXshkbmmlEg4wN3ae2Et4P9-aUSJfEHKk',
+                    },
+                });
+                setContent(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        getRandomContent();
+    }, [type]);
+
     return (
         <div className="featured">
             {type && (
@@ -27,26 +49,28 @@ export default function Featured({ type }) {
                 </div>
             )}
 
-            <img src={ptvh1Img} alt=""></img>
+            {Array.isArray(movieContent) &&
+                movieContent.map((item, i) => {
+                    return (
+                        <>
+                            <img src={item.img} alt=""></img>
 
-            <div className="info">
-                <img src={infoImage} alt="" />
-                <span className="desc">
-                    React Netflix Movie App Design Tutorial | React UI Full Course for Beginners React Netflix Movie App
-                    Design Tutorial | React UI Full Course for Beginners React Netflix Movie App Design Tutorial | React
-                    UI Full Course for Beginners
-                </span>
-                s
-                <div className="buttons">
-                    <button className="play">
-                        <PlayArrow />
-                    </button>
-                    <button className="more">
-                        <InfoOutlined />
-                        <span>Info</span>
-                    </button>
-                </div>
-            </div>
+                            <div className="info">
+                                <img src={item.imgTitle} alt="" />
+                                <span className="desc">{item.desc}</span>
+                                <div className="buttons">
+                                    <button className="play">
+                                        <PlayArrow />
+                                    </button>
+                                    <button className="more">
+                                        <InfoOutlined />
+                                        <span>Info</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    );
+                })}
         </div>
     );
 }
