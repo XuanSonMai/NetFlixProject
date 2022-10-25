@@ -9,36 +9,8 @@ import NewUser from './pages/newUser/NewUser';
 import ProductList from './pages/productList/ProductList';
 import Product from './pages/product/Product';
 import NewProduct from './pages/newProduct/NewProduct';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useMemo } from 'react';
 
 function App() {
-    const MONTHS = useMemo(() => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
-
-    const [userStats, setUserStats] = useState([]);
-
-    useEffect(() => {
-        const getStats = async () => {
-            try {
-                const res = await axios.get('/users/stats', {
-                    headers: {
-                        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGRiYWIxODA4NjQ4NjI2ODI1MWY2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjM5OTM5MSwiZXhwIjoxNjY2ODMxMzkxfQ.xjx_SgXKKsqXshkbmmlEg4wN3ae2Et4P9-aUSJfEHKk',
-                    },
-                });
-
-                res.data.map((item) =>
-                    setUserStats((pre) => [...pre, { name: MONTHS[item._id - 1], 'New User': item.soluong }]),
-                );
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        getStats();
-    }, []);
-    console.log(userStats);
     return (
         <Router>
             <Topbar />

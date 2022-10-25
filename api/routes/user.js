@@ -67,19 +67,6 @@ router.get('/stats', async (req, res) => {
     const today = new Date();
     const lastYear = today.setFullYear(today.setFullYear() - 1);
     console.log('stats');
-    const monthsArrays = [
-        'Thang 1',
-        'Thang 2',
-        'Thang 3',
-        'Thang 4',
-        'Thang 5',
-        'Thang 6',
-        'Thang 7',
-        'Thang 8',
-        'Thang 9',
-        'Thang 10',
-        'Thang 12',
-    ];
 
     try {
         const data = await User.aggregate([
@@ -87,11 +74,11 @@ router.get('/stats', async (req, res) => {
             {
                 $group: {
                     _id: '$month1',
-                    soluong: { $sum: 1 },
+                    count: { $sum: 1 },
                 },
             },
         ]);
-        console.log(data);
+
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
