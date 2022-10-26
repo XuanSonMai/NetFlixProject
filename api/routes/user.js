@@ -51,10 +51,9 @@ router.delete('/:id', verify, async (req, res) => {
 //GET ALL
 router.get('/', verify, async (req, res) => {
     const query = req.query.new;
-    console.log('query', query);
 
     try {
-        const users = query ? await User.find().sort({}).limit(5) : await User.find();
+        const users = query ? await User.find().sort({}).limit(2) : await User.find();
 
         res.status(200).json(users);
     } catch (error) {
