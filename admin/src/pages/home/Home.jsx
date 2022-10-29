@@ -38,7 +38,7 @@ export default function Home() {
 
         getStats();
     }, []);
-    console.log(userStats);
+
     return (
         <div className="home">
             <FeaturedInfo />
