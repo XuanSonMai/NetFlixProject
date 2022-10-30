@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { AuthContextConProvider } from './context/authContext/AuthContext';
+import { AuthContextProvider } from './context/authContext/AuthContext';
+import { MovieContextProvider } from './context/movieContext/MovieContext';
 
 ReactDOM.render(
     <React.StrictMode>
-        <AuthContextConProvider>
-            <App />
-        </AuthContextConProvider>
+        <AuthContextProvider>
+            <MovieContextProvider>
+                {' '}
+                <App />
+            </MovieContextProvider>
+        </AuthContextProvider>
     </React.StrictMode>,
     document.getElementById('root'),
 );

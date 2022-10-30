@@ -1,30 +1,43 @@
 const MovieReducer = (state, action) => {
-    console.log('state', state, 'action', action);
+    //console.log('action', action);
     switch (action.type) {
-        case 'GET_MOVIE_START':
+        case 'GET_MOVIES_START':
             return {
-                movie: [],
-                isFetcjng: true,
+                movies: [],
+                isFetching: true,
                 error: false,
             };
-        case 'GET_MOVIE_SUCCESS':
+        case 'GET_MOVIES_SUCCESS':
             return {
-                user: action.payload,
-                isFetcjng: false,
-                error: false,
-            };
-        case 'GET_MOVIE_FAILURE':
-            return {
-                user: null,
-                isFetcjng: false,
-                error: true,
-            };
-        case 'LOGOUT':
-            return {
-                user: null,
+                movies: action.payload,
                 isFetching: false,
                 error: false,
             };
+        case 'GET_MOVIES_FAILURE':
+            return {
+                movies: [],
+                isFetching: false,
+                error: true,
+            };
+        case 'DELETE_MOVIE_START':
+            return {
+                ...state,
+                isFetching: true,
+                error: false,
+            };
+        case 'DELETE_MOVIE_SUCCESS':
+            return {
+                movies: state.movies.filter((movie) => movie._id !== action.payload),
+                isFetching: false,
+                error: true,
+            };
+        case 'DELETE_MOVIE_FAILURE':
+            return {
+                ...state,
+                isFetching: false,
+                error: true,
+            };
+
         default:
             return { ...state };
     }
