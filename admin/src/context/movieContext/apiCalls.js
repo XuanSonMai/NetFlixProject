@@ -5,8 +5,12 @@ import {
     deleteMoviesSuccess,
     deleteMoviesFailure,
     deleteMoviesStart,
+    createMoviesStart,
+    createMoviesSuccess,
+    createMoviesFailure,
 } from './MovieActions';
 import axios from 'axios';
+
 export const getMovies = async (dispatch) => {
     dispatch(getMoviesStart());
     try {
@@ -33,5 +37,22 @@ export const deleteMovie = async (id, dispatch) => {
     } catch (error) {
         console.log('delete failue');
         dispatch(deleteMoviesFailure());
+    }
+};
+
+export const createMovie = async (movie, dispatch) => {
+    dispatch(createMoviesStart());
+
+    try {
+        console.log('CREAT MOVIEE');
+        const res = await axios.post('/movies/', movie, {
+            headers: { token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken },
+        });
+        console.log('res', res);
+
+        dispatch(createMoviesSuccess(res.data));
+    } catch (error) {
+        console.log('CREAT FAILURE');
+        dispatch(createMoviesFailure());
     }
 };

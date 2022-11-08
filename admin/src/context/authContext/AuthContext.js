@@ -12,11 +12,8 @@ const useReducer2 = (callBack, initState) => {
     console.log('handle usereduce ccccccc');
     const dispatch = (action) => {
         if (action.payload) {
-            if (JSON.parse(localStorage.getItem('user'))._id !== action.payload._id) {
-                console.log('set lai local');
-                localStorage.setItem('user', JSON.stringify(action.payload));
-            } else {
-            }
+            console.log('set lai local');
+            localStorage.setItem('user', JSON.stringify(action.payload));
         } else {
             console.log(action);
         }

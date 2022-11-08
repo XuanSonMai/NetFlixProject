@@ -15,15 +15,15 @@ export const getMoviesFailure = () => ({
 });
 
 //ACTION DELETE
-export const deleteMoviesStart = () => ({
-    type: 'DELETE_MOVIE_START',
+export const deleteListStart = () => ({
+    type: 'DELETE_LIST_START',
 });
-export const deleteMoviesSuccess = (id) => ({
-    type: 'DELETE_MOVIE_SUCCESS',
+export const deleteListSuccess = (id) => ({
+    type: 'DELETE_LIST_SUCCESS',
     payload: id,
 });
-export const deleteMoviesFailure = () => ({
-    type: 'DELETE_MOVIE_FAILURE',
+export const deleteListFailure = () => ({
+    type: 'DELETE_LIST_FAILURE',
 });
 
 //ACTION CREATE
@@ -48,4 +48,16 @@ export const updateMoviesSuccess = (movie) => ({
 });
 export const updateMoviesFailure = () => ({
     type: 'UPDATE_MOVIE_FAILURE',
+});
+
+//ACTION GETLISTLIST
+export const getListsStart = () => ({
+    type: 'GET_LISTS_START',
+});
+export const getListsSuccess = (lists) => ({
+    type: 'GET_LISTS_SUCCESS',
+    payload: lists,
+});
+export const getListsFailure = () => ({
+    type: 'GET_LISTS_FAILURE',
 });

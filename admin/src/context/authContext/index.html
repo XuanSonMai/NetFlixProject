@@ -15,10 +15,30 @@
                 });
                 return result;
             };
+            const alert = (callback) => {
+                callback(url);
+            };
             // add method that name is filter2
-            Array.prototype.filter2 = filter;
+            Array.prototype.then = alert;
             const arrays = [1, 1, 1, 0, 2, 3];
-            console.log(arrays.filter2((ele) => ele === 1));
+            const getDownloadUrl = () => {
+                const url = 'facebook.com';
+                return {
+                    then: (callback) => {
+                        url && callback(url);
+                        return {
+                            err: (calllback) => {
+                                !url && callback('Error');
+                            },
+                        };
+                    },
+                };
+            };
+            getDownloadUrl()
+                .then((url) => {
+                    console.log(url);
+                })
+                .err((err) => console.log(err));
         </script>
     </body>
 </html>

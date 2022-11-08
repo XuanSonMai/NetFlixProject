@@ -1,5 +1,23 @@
-const MovieReducer = (state, action) => {
+const ListReducer = (state, action) => {
     switch (action.type) {
+        case 'GET_LISTS_START':
+            return {
+                lists: [],
+                isFetching: true,
+                error: false,
+            };
+        case 'GET_LISTS_SUCCESS':
+            return {
+                lists: action.payload,
+                isFetching: false,
+                error: false,
+            };
+        case 'GET_LISTS_FAILURE':
+            return {
+                lists: [],
+                isFetching: false,
+                error: true,
+            };
         case 'CREAT_MOVIE_START':
             return {
                 ...state,
@@ -54,19 +72,19 @@ const MovieReducer = (state, action) => {
                 isFetching: false,
                 error: true,
             };
-        case 'DELETE_MOVIE_START':
+        case 'DELETE_LIST_START':
             return {
                 ...state,
                 isFetching: true,
                 error: false,
             };
-        case 'DELETE_MOVIE_SUCCESS':
+        case 'DELETE_LIST_SUCCESS':
             return {
-                movies: state.movies.filter((movie) => movie._id !== action.payload),
+                lists: state.lists.filter((list) => list._id !== action.payload),
                 isFetching: false,
                 error: true,
             };
-        case 'DELETE_MOVIE_FAILURE':
+        case 'DELETE_LIST_FAILURE':
             return {
                 ...state,
                 isFetching: false,
@@ -77,4 +95,4 @@ const MovieReducer = (state, action) => {
             return { ...state };
     }
 };
-export default MovieReducer;
+export default ListReducer;

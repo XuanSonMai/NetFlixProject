@@ -43,6 +43,8 @@ router.delete('/:id', verify, async (req, res) => {
         } catch (error) {
             res.status(403).json('You are not allowed');
         }
+    } else {
+        res.status(403).json('You are not Admin');
     }
 });
 

@@ -11,9 +11,6 @@ import { getMovies, deleteMovie } from '../../context/movieContext/apiCalls';
 
 export default function MoviesList() {
     const { movies, dispatch } = useContext(MovieContext);
-    {
-        console.log('movies', movies);
-    }
 
     useEffect(() => getMovies(dispatch), [dispatch]);
     const handleDelete = (id) => {
@@ -49,7 +46,7 @@ export default function MoviesList() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={'/product/' + params.row.id}>
+                        <Link to={{ pathname: 'product/' + params.row._id, movie: params.row }}>
                             <button className="moviesListEdit">Edit</button>
                         </Link>
                         <DeleteOutline className="moviesListDelete" onClick={() => handleDelete(params.row._id)} />
