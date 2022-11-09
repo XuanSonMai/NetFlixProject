@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import './newList.css';
-import storage from '../../firebase';
-import { storageRef } from '../../firebase';
+
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { createMovie, getMovies } from '../../context/movieContext/apiCalls';
 import { useContext } from 'react';
-
+import { useHistory } from 'react-router-dom';
 import { ListContext } from '../../context/listContext/ListContext';
 import { MovieContext } from '../../context/movieContext/MovieContext';
 import { createList } from '../../context/listContext/apiCalls';
 
 export default function NewList() {
     const [list, setList] = useState(null);
+    const history = useHistory();
 
     const { dispatch } = useContext(ListContext);
     const { movies, dispatch: dispatchMovie } = useContext(MovieContext);
@@ -30,6 +30,7 @@ export default function NewList() {
     const handleSubmit = (e) => {
         e.preventDefault();
         createList(list, dispatch);
+        history.push('/lists');
     };
 
     const handleSelect = (e) => {
