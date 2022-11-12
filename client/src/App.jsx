@@ -13,7 +13,7 @@ const App = () => {
         <React.StrictMode>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={user ? <Home /> : <Navigate to="/register" />} />
+                    <Route path="/" element={user ? <Home type="movie" /> : <Navigate to="/register" />} />
                     <Route exact path="/" element={<Home type="movie" />} />
 
                     {/* MOVIES */}

@@ -5,15 +5,15 @@ import ptvh1Img from '../../acsets/img/ptvh1.jpeg';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-export default function Featured({ type, title }) {
+export default function Featured({ type, title, setGenre }) {
     const [movieContent, setContent] = useState({});
-    console.log(movieContent);
+
     useEffect(() => {
         const getRandomContent = async () => {
             try {
                 const res = await axios.get(`/movies/random?type=${type}` + `${title ? '&title=' + title : ''}`, {
                     headers: {
-                        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGRiYWIxODA4NjQ4NjI2ODI1MWY2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjM5OTM5MSwiZXhwIjoxNjY2ODMxMzkxfQ.xjx_SgXKKsqXshkbmmlEg4wN3ae2Et4P9-aUSJfEHKk',
+                        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGRiYWIxODA4NjQ4NjI2ODI1MWY2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2ODE3NTMxOSwiZXhwIjoxNjY4NjA3MzE5fQ.LKBQtKimuHTKCTub0MAJ_kC0CQ5OuIexPw5lCQW9Gco',
                     },
                 });
                 setContent(res.data);
@@ -30,9 +30,9 @@ export default function Featured({ type, title }) {
             {type && (
                 <div className="category">
                     <span>{type === 'movies' ? 'Movies' : 'Series'}</span>
-                    <select name="genre" id="genre">
+                    <select name="genre" id="genre" onChange={(e) => setGenre(e.target.value)}>
                         <option>Genre</option>
-                        <option value="adventure">Adventure</option>
+                        <option value="adventure">Series</option>
                         <option value="comedy">Comedy</option>
                         <option value="crime">Crime</option>
                         <option value="fantasy">Fantasy</option>

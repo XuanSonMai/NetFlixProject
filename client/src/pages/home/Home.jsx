@@ -9,17 +9,18 @@ import axios from 'axios';
 export const Home = ({ type, title }) => {
     const [lists, setLists] = useState([]);
     const [genre, setGenre] = useState(null);
-    console.log('title', title);
+    console.log('genre', genre);
 
     useEffect(() => {
         const getRandomLists = async () => {
             try {
-                const res = await axios.get(`/list/options${type ? '?type=' + type : ''}`, {
+                const res = await axios.get(`/lists/options${type ? '?type=' + type : ''}`, {
                     headers: {
-                        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGRiYWIxODA4NjQ4NjI2ODI1MWY2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjM5OTM5MSwiZXhwIjoxNjY2ODMxMzkxfQ.xjx_SgXKKsqXshkbmmlEg4wN3ae2Et4P9-aUSJfEHKk',
+                        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGRiYWIxODA4NjQ4NjI2ODI1MWY2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2ODE3NTMxOSwiZXhwIjoxNjY4NjA3MzE5fQ.LKBQtKimuHTKCTub0MAJ_kC0CQ5OuIexPw5lCQW9Gco',
                     },
                 });
-
+                console.log('url', `/lists/options${type ? '?type=' + type : ''}`);
+                console.log('resdata', res.data);
                 setLists(res.data);
             } catch (error) {
                 console.log(error);
@@ -32,7 +33,7 @@ export const Home = ({ type, title }) => {
     return (
         <div className="home">
             <Navbar />
-            <Featured type={type} title={title} />
+            <Featured type={type} title={title} setGenre={setGenre} />
             {lists.map((list, index) => (
                 <List key={index} list={list} />
             ))}
