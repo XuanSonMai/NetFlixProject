@@ -86,7 +86,7 @@ router.get('/options', verify, async (req, res) => {
                 list = await List.aggregate([{ $sample: { size: 10 } }, { $match: { type: typeQuery } }]);
             }
         } else {
-            list = await List.aggregate([{ $sample: { size: 3 } }]);
+            list = await List.aggregate([{ $sample: { size: 100 } }]);
         }
 
         res.status(200).json(list);
